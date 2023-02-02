@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessageController!{% endblock %}
+{% block entete %}
+    {% include '/elements/navbar.html.twig' %}
+{% endblock %}
+{% block body %}
+   {{ form_start(formContact) }}
+   <div class="container w-25 p-5 border mt-5 rounded-3">
+        <div class="mb-3">
+         {{ form_label(formContact.nom, 'Nom',{'label_attr': {'class': 'form-label'}}) }}
+         {{ form_widget(formContact.nom, {'attr': {'placeholder': 'Nom du contact','class': 'form-control' }}) }}
+        </div>
+        <div class="mb-3">
+         {{ form_label(formContact.prenom, 'Prénom',{'label_attr': {'class': 'form-label'}}) }}
+         {{ form_widget(formContact.prenom, {'attr': {'placeholder': 'Prénom du contact','class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+         {{ form_label(formContact.email, 'Mail',{'label_attr': {'class': 'form-label'}}) }}
+         {{ form_widget(formContact.email, {'attr': {'placeholder': 'Email du contact','class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+         <div class="form-floating">
+            {{ form_widget(formContact.message, {'attr': {'class':'form-control'}}) }}
+            {{ form_label(formContact.message, 'Que voulez-vous nous dire ?') }}
+         </div>
+        </div>
+        <input type="submit" value="Envoyer" class="btn btn-success" />
+    </div>
+    {{ form_end(formContact) }}
+{% block footer %}
+    {% include '/elements/footer.html.twig' %}
+{% endblock %}    
+    
+
+{% endblock %}
