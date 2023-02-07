@@ -5,6 +5,11 @@
     {% include '/elements/navbar.html.twig' %}
 {% endblock %}
 {% block body %}
+          {% for message in app.flashes('success') %}
+                <div class="alert alert-success mt-5">
+                    {{ message }}
+                </div>
+            {% endfor %}
    {{ form_start(formContact) }}
    <div class="container w-25 p-5 border mt-5 rounded-3">
         <div class="mb-3">
