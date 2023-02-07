@@ -7,12 +7,11 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NavireRepository::class)]
+#[Assert\Unique(fields:['imo','mmsi','indicatifAppel'])]
 #[ORM\Index(name:'ind_IMO', columns: ['imo'])]
 #[ORM\Index(name:'ind_MMSI', columns: ['mmsi'])]    
 class Navire
-{
-    #[Assert\Unique(fields:['imo','mmsi','indicatifAppel'])]
-            
+{           
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
