@@ -28,7 +28,7 @@ class Message
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateMessage = null;
-
+    
     public function getId(): ?int
     {
         return $this->id;

@@ -16,7 +16,6 @@ class ContactFormType extends AbstractType
             ->add('prenom')
             ->add('email')
             ->add('message')
-            ->add('dateMessage')
         ;
     }
 
