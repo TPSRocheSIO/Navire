@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AisShipTypeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name :'aisshiptype')]
@@ -30,6 +32,14 @@ class AisShipType
     #[ORM\OneToMany(mappedBy: 'aisShipType', targetEntity: Navire::class)]
     private Collection $navires;
 
+    #[ORM\ManyToMany(targetEntity: Port::class, mappedBy: 'types')]
+    private Collection $portCompatibles;
+
+    public function __construct()
+    {
+        $this->portCompatibles = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,6 +65,30 @@ class AisShipType
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Port>
+     */
+    public function getPortCompatibles(): Collection
+    {
+        return $this->portCompatibles;
+    }
+
+    public function addPortCompatible(Port $portCompatible): self
+    {
+        if (!$this->portCompatibles->contains($portCompatible)) {
+            $this->portCompatibles->add($portCompatible);
+        }
+
+        return $this;
+    }
+
+    public function removePortCompatible(Port $portCompatible): self
+    {
+        $this->portCompatibles->removeElement($portCompatible);
 
         return $this;
     }

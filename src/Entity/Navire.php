@@ -18,15 +18,15 @@ class Navire
     private ?int $id = null;
 
     #[ORM\Column(length: 7)]
-    #[Assert\Regex('[1-9][0-9]{6}', message : 'le numéro IMO doit être unique et composé de 7 chiffres sans commencer par 0')]
+    #[Assert\Regex('/[1-9][0-9]{6}/', message : 'le numéro IMO doit être unique et composé de 7 chiffres sans commencer par 0')]
     private ?string $imo = null;
 
     #[ORM\Column(length: 100)]
-    #[Assert\Regex('[0-9a-zA-Z]{3,}', message : 'le nom du navire doit contenir 3 caractères alphanumériques au minimum')]
+    #[Assert\Regex('/[0-9a-zA-Z]{3,}/', message : 'le nom du navire doit contenir 3 caractères alphanumériques au minimum')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 9)]
-    #[Assert\Regex('[1-9][0-9]{6}', message : 'le numéro MMSI doit être unique et composé de 9 chiffres sans commencer par 0')]
+    #[Assert\Regex('/[1-9][0-9]{6}/', message : 'le numéro MMSI doit être unique et composé de 9 chiffres sans commencer par 0')]
     private ?string $mmsi = null;
 
     #[ORM\Column(length: 10, name: 'indicatifAppel')]
