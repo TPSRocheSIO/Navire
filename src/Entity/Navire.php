@@ -28,11 +28,24 @@ class Navire
     #[Assert\Regex('[1-9][0-9]{6}', message : 'le numéro MMSI doit être unique et composé de 9 chiffres sans commencer par 0')]
     private ?string $mmsi = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, name: 'indicatifAppel')]
     private ?string $indicatifAppel = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $eta = null;
+
+    #[ORM\Column]
+    private ?int $longueur = null;
+
+    #[ORM\Column]
+    private ?int $largeur = null;
+
+    #[ORM\Column]
+    private ?float $tirantdeau = null;
+    
+    #[ORM\ManyToOne(inversedBy: 'navires')]
+    #[ORM\JoinColumn(name:'idaisshiptype', referencedColumnName:'id', nullable: false)]
+    private ?AisShipType $aisShipType = null;
 
     public function getId(): ?int
     {
@@ -95,6 +108,42 @@ class Navire
     public function setEta(?\DateTimeInterface $eta): self
     {
         $this->eta = $eta;
+
+        return $this;
+    }
+
+    public function getLongueur(): ?int
+    {
+        return $this->longueur;
+    }
+
+    public function setLongueur(int $longueur): self
+    {
+        $this->longueur = $longueur;
+
+        return $this;
+    }
+
+    public function getLargeur(): ?int
+    {
+        return $this->largeur;
+    }
+
+    public function setLargeur(int $largeur): self
+    {
+        $this->largeur = $largeur;
+
+        return $this;
+    }
+
+    public function getTirantdeau(): ?float
+    {
+        return $this->tirantdeau;
+    }
+
+    public function setTirantdeau(float $tirantdeau): self
+    {
+        $this->tirantdeau = $tirantdeau;
 
         return $this;
     }

@@ -21,10 +21,14 @@ class AisShipType
             max: 9,
             notInRangeMessage : 'Le type AIS doit être compris entre {{ min }} et {{ max }}'
     )]
+        
     private ?int $aisShipType = null;
 
     #[ORM\Column(length: 60)]
     private ?string $libelle = null;
+    
+    #[ORM\OneToMany(mappedBy: 'aisShipType', targetEntity: Navire::class)]
+    private Collection $navires;
 
     public function getId(): ?int
     {
