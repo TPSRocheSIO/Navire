@@ -7,6 +7,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NavireRepository::class)]
+#[ORM\Index(name:'ind_IMO', columns: ['imo'])]
+#[ORM\Index(name:'ind_MMSI', columns: ['mmsi'])]    
 class Navire
 {
     #[Assert\Unique(fields:['imo','mmsi','indicatifAppel'])]
@@ -46,6 +48,10 @@ class Navire
     #[ORM\ManyToOne(inversedBy: 'navires')]
     #[ORM\JoinColumn(name:'idaisshiptype', referencedColumnName:'id', nullable: false)]
     private ?AisShipType $aisShipType = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(name:'idpays', referencedColumnName:'id', nullable: false)]
+    private ?Pays $pavillon = null;
 
     public function getId(): ?int
     {
@@ -144,6 +150,18 @@ class Navire
     public function setTirantdeau(float $tirantdeau): self
     {
         $this->tirantdeau = $tirantdeau;
+
+        return $this;
+    }
+
+    public function getPavillon(): ?Pays
+    {
+        return $this->pavillon;
+    }
+
+    public function setPavillon(?Pays $pavillon): self
+    {
+        $this->pavillon = $pavillon;
 
         return $this;
     }
