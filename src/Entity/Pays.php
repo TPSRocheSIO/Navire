@@ -22,6 +22,9 @@ class Pays
     #[ORM\Column(length: 3, name: 'indicatif')]
     #[Assert\Regex('/[A-Z]{3}/', message : 'L\'indicatif doit contenir uniquement 3 lettres majuscules')]
     private ?string $indicatif = null;
+    
+     #[ORM\OneToMany(mappedBy: 'port', targetEntity: Escale::class, orphanRemoval: true)]
+     private Collection $escales;
 
     public function getId(): ?int
     {
